@@ -1,17 +1,21 @@
 .gallery-container {
 	width: 80%;
-	height: 300px;
+	height: 400px;
 	overflow-x: hidden;
 	position: relative;
 	margin-right: auto;
 	margin-left: auto;
+	display: inline-block;
+}
+
+#back,
+#forward {
+	display: inline-block;
 }
 
 .gallery-img {
 	width: 80%;
 	height: auto;
-	position: absolute;
-	top: 0;
 }
 
 .gallery-prev {

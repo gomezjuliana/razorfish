@@ -58,19 +58,35 @@ let count = 0;
 
 function setUp(){
 	document.querySelector('.gallery-curr').src = info.photos[count].image;	
+	document.querySelector('figure figcaption h2').textContent = info.photos[count].title;
+	document.querySelector('figure figcaption p').textContent = 'This photo was taken on '+info.photos[count].date+' in '+info.photos[count].location;
 }
 
 document.getElementById('forward').addEventListener('click', goForward);
 document.getElementById('back').addEventListener('click', goBackward);
+document.querySelector('.thumbnails').addEventListener('click', changePhoto);
 
 function goForward() {
 	count = count >= info.photos.length-1 ? 0 : count+1;
 	document.querySelector('.gallery-curr').src = info.photos[count].image;
+	document.querySelector('figure figcaption h2').textContent = info.photos[count].title;
+	document.querySelector('figure figcaption p').textContent = 'This photo was taken on '+info.photos[count].date+' in '+info.photos[count].location;
 }
 
 function goBackward(){
 	count = count <= 0 ? info.photos.length-1 : count-1;
 	document.querySelector('.gallery-curr').src = info.photos[count].image;
+	document.querySelector('figure figcaption h2').textContent = info.photos[count].title;
+	document.querySelector('figure figcaption p').textContent = 'This photo was taken on '+info.photos[count].date+' in '+info.photos[count].location;
+}
+
+function changePhoto(e){
+	console.log(e);
+	let targetElement = e.target || e.srcElement;
+	console.log(e.path[0]);
+	document.querySelector('.gallery-curr').src = targetElement.getAttribute('src');
+	document.querySelector('figure figcaption h2').textContent = info.photos[count].title;
+	document.querySelector('figure figcaption p').textContent = 'This photo was taken on '+info.photos[count].date+' in '+info.photos[count].location;
 }
 
 setUp();
