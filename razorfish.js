@@ -1,58 +1,3 @@
-/*function fetchJSONFile(path, callback){
-	let httpRequest = new XMLHttpRequest();
-	httpRequest.onreadystatechange = function() {
-		if (httpRequest.readyState === XMLHttpRequest.DONE){
-			if (httpRequest.status === 200) {
-				var data = JSON.parse(httpRequest.responseText);
-				if (callback) callback(data);
-			}
-		}
-	};
-	httpRequest.open('GET', path);
-	httpRequest.send();
-}
-
-fetchJSONFile('gallery_json.js', function(data){
-	console.log(data);
-});*/
-
-/*function loadJSON(callback) {
-	let jsonResponse = new XMLHttpRequest();
-		jsonResponse.overrideMimeType("application/json");
-	jsonResponse.open('GET', 'gallery_json.json', true);
-	jsonResponse.onreadystatechange = function () {
-		if (jsonResponse.readyState == 4 && jsonResponse.status == "200") {
-			callback(jsonResponse.responseText);
-		}
-	};
-	jsonResponse.send(null);
-}
-
-function init(){
-	loadJSON(function(response){
-		console.log(JSON.parse(response));
-	});
-}
-
-init();*/
-
-/*function XHR(file, callback){
-	let xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function(){
-		if (xhr.readyState === 4 && xhr.status === 200){
-			callback(xhr.responseText);
-		}
-	}
-	xhr.open('GET', file, true);
-	xhr.send();
-}
-
-function print(response){
-	console.log(response);
-}
-
-XHR('gallery_json.json', print);*/
-
 let info = {
   "album": {
     "name": "Intel 2013 Conference Moments"
@@ -111,40 +56,21 @@ let info = {
 
 let count = 0;
 
-let prevImg = document.querySelector('.gallery-prev');
-let currImg = document.querySelector('.gallery-curr');
-let nextImg = document.querySelector('.gallery-next');
-
 function setUp(){
-	const prev = count-1 < 0 ? info.photos.length-1 : count-1;
-	const next = count+1 >= info.photos.length ? 0 : count+1;
-	console.log(prev);
-	console.log(next);
-	prevImg.src = info.photos[0].image;
-	currImg.src = info.photos[1].image;
-	nextImg.src = info.photos[2].image;	
-	prevImg.classList.remove('gallery-prev-curr');
-	nextImg.classList.remove('gallery-next-curr');
-	currImg.classList.remove('gallery-curr-prev', 'gallery-curr-next');
+	document.querySelector('.gallery-curr').src = info.photos[count].image;	
 }
 
-window.onload = function clickForward(){
-	document.getElementById('forward').onclick = function goForward(){
-		nextImg.classList.add('gallery-next-curr');
-		currImg.classList.add('gallery-curr-prev');
-		count = count >= info.photos.length-1 ? 0: count+1;
+document.getElementById('forward').addEventListener('click', goForward);
+document.getElementById('back').addEventListener('click', goBackward);
 
-		//currImg.addEventListener('transitionend', setUp)
-	}
+function goForward() {
+	count = count >= info.photos.length-1 ? 0 : count+1;
+	document.querySelector('.gallery-curr').src = info.photos[count].image;
 }
 
-window.onload = function clickBackward(){
-	document.getElementById('back').onclick = function goBackward(){
-		prevImg.classList.add('gallery-prev-curr');
-		currImg.classList.add('gallery-curr-next');
-		count = count <= 0 ? info.photos.length-1 : count -1;
-	}
-
+function goBackward(){
+	count = count <= 0 ? info.photos.length-1 : count-1;
+	document.querySelector('.gallery-curr').src = info.photos[count].image;
 }
 
 setUp();
