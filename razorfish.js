@@ -109,20 +109,42 @@ let info = {
   ]
 }
 
-function print(obj){
-	document.getElementById('photo').src = obj.photos[5].image;
-	document.querySelector('.gallery figure figcaption h1').textContent = obj.photos[5].title;
-	document.querySelector('.gallery figure figcaption p').textContent = 'This photo was taken in '+obj.photos[5].location+' on '+obj.photos[5].date;
+let count = 0;
+
+let prevImg = document.querySelector('.gallery-prev');
+let currImg = document.querySelector('.gallery-curr');
+let nextImg = document.querySelector('.gallery-next');
+
+function setUp(){
+	const prev = count-1 < 0 ? info.photos.length-1 : count-1;
+	const next = count+1 >= info.photos.length ? 0 : count+1;
+	console.log(prev);
+	console.log(next);
+	prevImg.src = info.photos[0].image;
+	currImg.src = info.photos[1].image;
+	nextImg.src = info.photos[2].image;	
+	prevImg.classList.remove('gallery-prev-curr');
+	nextImg.classList.remove('gallery-next-curr');
+	currImg.classList.remove('gallery-curr-prev', 'gallery-curr-next');
 }
 
-window.onload = function goForward(){
-	document.getElementById('forward').onclick = function fun(){
-		console.log('clicked!');
+window.onload = function clickForward(){
+	document.getElementById('forward').onclick = function goForward(){
+		nextImg.classList.add('gallery-next-curr');
+		currImg.classList.add('gallery-curr-prev');
+		count = count >= info.photos.length-1 ? 0: count+1;
+
+		//currImg.addEventListener('transitionend', setUp)
 	}
 }
 
-function goBackward(){
+window.onload = function clickBackward(){
+	document.getElementById('back').onclick = function goBackward(){
+		prevImg.classList.add('gallery-prev-curr');
+		currImg.classList.add('gallery-curr-next');
+		count = count <= 0 ? info.photos.length-1 : count -1;
+	}
 
 }
 
-print(info);
+setUp();

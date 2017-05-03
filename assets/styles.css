@@ -1,0 +1,48 @@
+.gallery-container {
+	width: 80%;
+	height: 300px;
+	overflow-x: hidden;
+	position: relative;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.gallery-img {
+	width: 80%;
+	height: auto;
+	position: absolute;
+	top: 0;
+}
+
+.gallery-prev {
+	left: -100%;
+}
+
+.gallery-prev-curr {
+	left: 0;
+	transition: left 1s;
+}
+
+.gallery-next {
+	left: 100%;
+}
+
+.gallery-next-curr {
+	left: 0;
+	transition: left 1s;
+}
+
+.gallery-curr {
+	left: 0;
+}
+
+.gallery-curr-prev {
+	left: 100%;
+	transition: left 1s;
+}
+
+.gallery-curr-next {
+	left: 100%;
+	transition: left 1s;
+}
+
