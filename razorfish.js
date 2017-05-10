@@ -1,44 +1,48 @@
-function XHR(file){
+function XHR(file, callback){
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4 && xhr.status === 200){
         	let info = JSON.parse(xhr.responseText);
-            setUp(info);
+            callback(info);
         }
     }
     xhr.open('GET', file, true);
     xhr.send();
 }
 
-XHR('http://localhost:8000/Documents/Code-2017/razorfish/data.json');
+XHR('/data.json', setUp);
 
 let count = 0;
 
 function setUp(info){
 	change(info, count);
-	document.getElementById('forward').addEventListener('click', goForward);
-	document.getElementById('back').addEventListener('click', goBackward);
-	document.querySelector('.thumbnails').addEventListener('click', changePhoto);
+	document.getElementById('forward').addEventListener('click', goForward(info));
+	document.getElementById('back').addEventListener('click', () => goBackward(info));
+	// document.querySelector('.thumbnails').addEventListener('click', changePhoto);
 }
 
 function goForward(info) {
-	console.log('click!')
-	console.log(info)
-	count = count >= info.photos.length-1 ? 0 : count+1;
-	return change(info, count);
+	return function() {
+		document.getElementById([count]).classList.remove('meow');
+		count = count >= info.photos.length-1 ? 0 : count+1;
+		change(info, count);
+	}
 }
 
 function goBackward(info){
-	console.log(info);
+	document.getElementById([count]).classList.remove('meow');
 	count = count <= 0 ? info.photos.length-1 : count-1;
 	change(info, count);
 }
 
 function change(info, count){
-	console.log(info);
 	document.querySelector('.gallery-curr').src = info.photos[count].image;
 	document.querySelector('figure figcaption h2').textContent = info.photos[count].title;
 	document.querySelector('figure figcaption p').textContent = 'This photo was taken on '+info.photos[count].date+' in '+info.photos[count].location;
+	for (let i = count; i < info.photos.length; i++){
+		document.getElementById([i]).src = info.photos[i].thumb_url;
+	}
+	document.getElementById([count]).classList.add('meow');
 }
 
 function changePhoto(e){
@@ -49,4 +53,3 @@ function changePhoto(e){
 	document.querySelector('figure figcaption h2').textContent = info.photos[count].title;
 	document.querySelector('figure figcaption p').textContent = 'This photo was taken on '+info.photos[count].date+' in '+info.photos[count].location;
 }
-
