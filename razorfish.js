@@ -23,14 +23,14 @@ function setUp(info){
 
 function goForward(info) {
 	return function() {
-		document.getElementById([count]).classList.remove('meow');
+		document.getElementById([count]).classList.remove('highlight');
 		count = count >= info.photos.length-1 ? 0 : count+1;
 		change(info, count);
 	}
 }
 
 function goBackward(info){
-	document.getElementById([count]).classList.remove('meow');
+	document.getElementById([count]).classList.remove('highlight');
 	count = count <= 0 ? info.photos.length-1 : count-1;
 	change(info, count);
 }
@@ -42,7 +42,7 @@ function change(info, count){
 	for (let i = count; i < info.photos.length; i++){
 		document.getElementById([i]).src = info.photos[i].thumb_url;
 	}
-	document.getElementById([count]).classList.add('meow');
+	document.getElementById([count]).classList.add('highlight');
 }
 
 function changePhoto(e){

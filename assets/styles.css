@@ -33,6 +33,7 @@ body {
 	border: none;
 	padding: 1%;
 	color: blue;
+	font-size: 1.2em;
 }
 
 #back {
@@ -47,10 +48,7 @@ body {
 	width: 525px;
 	height: auto;
 	box-shadow: 0 0 15px;
-}
-
-.gallery-curr {
-	left: 0;
+	border: 1px white solid;
 }
 
 h1 {
@@ -98,6 +96,7 @@ p {
 	background-image: url('thumbnailbar.png');
 	text-align: center;
 	padding: 3%;
+	display: block;
 	position: relative;
 	top: -15px;
 }
@@ -107,9 +106,9 @@ p {
 	margin-right: 10px;
 }
 
-.meow {
+.highlight {
 	transform: scale(1.2);
-	border: 2px blue solid;
+	border: 2px #03a2df solid;
 }
 
 .shadow {
