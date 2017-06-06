@@ -116,3 +116,36 @@ p {
 	box-shadow: 0 0 24px;
 	display: inline-block;
 }
+
+@media (max-width: 320px){
+	.gallery-img{
+		width: 75%;
+	}
+
+	body {
+		width: 100%;
+	}
+
+	h1 {
+		font-size: 25px;
+	}
+
+	.gallery {
+		height: 375px;
+	}
+
+	#back {
+		top: 120px;
+		left: -125px;
+	}
+
+	#forward {
+		top: -430px;
+		right: -125px;
+	}
+
+	figcaption {
+		background-color: rgba(0, 0, 0, 0.5);
+		padding: 1%;
+	}
+}
